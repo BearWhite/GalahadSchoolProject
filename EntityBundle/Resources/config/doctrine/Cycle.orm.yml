@@ -1,0 +1,20 @@
+Biblio\EntityBundle\Entity\Cycle:
+    type: entity
+    table: null
+    repositoryClass: Biblio\EntityBundle\Entity\CycleRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        dureePret:
+            type: date
+        nbLivre:
+            type: integer                 
+    oneToMany:
+        lecteurs:
+            targetEntity: Lecteur
+            mappedBy: cycle
+lifecycleCallbacks: {  }

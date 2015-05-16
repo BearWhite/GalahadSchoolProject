@@ -1,0 +1,34 @@
+biblio_inscription_homepage:
+    path:     inscription/hello/{name}
+    defaults: { _controller: BiblioInscriptionBundle:Default:index }
+
+biblio_inscription_inscrit:
+    path:     inscription/
+    defaults: { _controller: "BiblioInscriptionBundle:Lecteur:index" }
+
+biblio_inscription_show:
+    path:     inscription/{id}/show
+    defaults: { _controller: "BiblioInscriptionBundle:Lecteur:show" }
+
+biblio_inscription_new:
+    path:     inscription/new
+    defaults: { _controller: "BiblioInscriptionBundle:Lecteur:new" }
+
+biblio_inscription_create:
+    path:     inscription/create
+    defaults: { _controller: "BiblioInscriptionBundle:Lecteur:create" }
+    methods:  POST
+
+biblio_inscription_edit:
+    path:     inscription/{id}/edit
+    defaults: { _controller: "BiblioInscriptionBundle:Lecteur:edit" }
+
+biblio_inscription_update:
+    path:     inscription/{id}/update
+    defaults: { _controller: "BiblioInscriptionBundle:Lecteur:update" }
+    methods:  [POST, PUT]
+
+biblio_inscription_delete:
+    path:     inscription/{id}/delete
+    defaults: { _controller: "BiblioInscriptionBundle:Lecteur:delete" }
+    methods:  [POST, DELETE]

@@ -1,0 +1,22 @@
+Biblio\EntityBundle\Entity\Auteur:
+    type: entity
+    table: null
+    repositoryClass: Biblio\EntityBundle\Entity\AuteurRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        nom:
+            type: string
+            length: '50'
+        prenom:
+            type: string
+            length: '50'                
+    manyToMany:
+        livres:
+            targetEntity: Livre
+            inversedBy: auteurs
+lifecycleCallbacks: {  }

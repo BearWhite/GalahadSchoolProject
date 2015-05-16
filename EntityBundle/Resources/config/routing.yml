@@ -1,0 +1,7 @@
+biblio_entity_livre:
+    resource: "@BiblioEntityBundle/Resources/config/routing/livre.yml"
+    prefix:   /livre
+
+biblio_entity_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: BiblioEntityBundle:Default:index }

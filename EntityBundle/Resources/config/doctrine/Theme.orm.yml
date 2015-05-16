@@ -1,0 +1,19 @@
+Biblio\EntityBundle\Entity\Theme:
+    type: entity
+    table: null
+    repositoryClass: Biblio\EntityBundle\Entity\ThemeRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        titre:
+            type: string
+            length: '100'                
+    manyToMany:
+        livres:
+            targetEntity: Livre
+            inversedBy: themes
+lifecycleCallbacks: {  }

@@ -1,0 +1,30 @@
+livre:
+    path:     /
+    defaults: { _controller: "BiblioEntityBundle:Livre:index" }
+
+livre_show:
+    path:     /{id}/show
+    defaults: { _controller: "BiblioEntityBundle:Livre:show" }
+
+livre_new:
+    path:     /new
+    defaults: { _controller: "BiblioEntityBundle:Livre:new" }
+
+livre_create:
+    path:     /create
+    defaults: { _controller: "BiblioEntityBundle:Livre:create" }
+    methods:  POST
+
+livre_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "BiblioEntityBundle:Livre:edit" }
+
+livre_update:
+    path:     /{id}/update
+    defaults: { _controller: "BiblioEntityBundle:Livre:update" }
+    methods:  [POST, PUT]
+
+livre_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "BiblioEntityBundle:Livre:delete" }
+    methods:  [POST, DELETE]

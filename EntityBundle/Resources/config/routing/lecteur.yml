@@ -1,0 +1,30 @@
+lecteur:
+    path:     /
+    defaults: { _controller: "BiblioEntityBundle:Lecteur:index" }
+
+lecteur_show:
+    path:     /{id}/show
+    defaults: { _controller: "BiblioEntityBundle:Lecteur:show" }
+
+lecteur_new:
+    path:     /new
+    defaults: { _controller: "BiblioEntityBundle:Lecteur:new" }
+
+lecteur_create:
+    path:     /create
+    defaults: { _controller: "BiblioEntityBundle:Lecteur:create" }
+    methods:  POST
+
+lecteur_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "BiblioEntityBundle:Lecteur:edit" }
+
+lecteur_update:
+    path:     /{id}/update
+    defaults: { _controller: "BiblioEntityBundle:Lecteur:update" }
+    methods:  [POST, PUT]
+
+lecteur_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "BiblioEntityBundle:Lecteur:delete" }
+    methods:  [POST, DELETE]

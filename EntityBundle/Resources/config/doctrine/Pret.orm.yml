@@ -1,0 +1,26 @@
+Biblio\EntityBundle\Entity\Pret:
+    type: entity
+    table: null
+    repositoryClass: Biblio\EntityBundle\Entity\PretRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        dateReservation:
+            type: date
+        dateRetourMax:
+            type: date
+        isReservation:
+            type: boolean                 
+    oneToMany:
+        inscrit:
+            targetEntity: Lecteur
+            mappedBy: pret
+    manyToOne:
+        livre:
+           targetEntity: Livre
+           inversedBy: prets
+lifecycleCallbacks: {  }
