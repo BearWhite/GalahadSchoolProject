@@ -1,0 +1,14 @@
+{% extends "BiblioPretBundle:Pret:layout.html.twig" %}
+
+{% block pret_contenu %}
+<h2>Menu Agent Prêt</h2>
+<ul>
+        <li><a href="{{ path('biblio_pret_list') }}"> Liste globale des prêts</a></li>
+        <li><a href="{{ path('biblio_pret_listByLivre') }}"> Recherche prêts par livre</a></li>
+        <li><a href="{{ path('biblio_pret_listByEmprunteur') }}"> Recherche prêts par emprunteur</a></li>
+        <li><a href="{{ path('biblio_pret_livre') }}">Vérifier disponibilité d'un livre</a></li>
+        <li><a href="{{ path('biblio_pret_hors_delai') }}">Prêt(s) hors délai </a></li>
+        <li><a href="{{ path('biblio_pret_sortie') }}">Sortie d'un livre</a></li>
+</ul>
+
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "BiblioPretBundle:Pret:layout.html.twig" %}
+
+{% block pret_contenu %}
+
+<h3>Liste des prêts</h3>
+{% for pret in prets %}
+ - Le livre " {{pret.livre.titre}} " a été emprunté le {{pret.dateReservation|date('d/m/Y')}} par {{pret.lecteur.nom}} {{pret.lecteur.prenom}} <a href="{{ path('biblio_pret_retour', { 'id': pret.id }) }}">Retour du prêt</a> </br>
+ {% else %}
+      <li>Aucun prêt pour cette recherche</li>
+{% endfor %}
+
+</br>
+
+{% for message in app.session.flashbag.get('info') %}
+
+   <p> {{ message }}</p>
+
+ {% endfor %}
+ 
+ <a class="btn btn-primary btn-lg" href="{{ path('biblio_pret_homepage') }}"> Retour Accueil</a>
+
+
+{% endblock %}
