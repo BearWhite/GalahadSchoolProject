@@ -20,10 +20,10 @@ Biblio\EntityBundle\Entity\Livre:
     manyToMany:
         themes:
             targetEntity: Theme
-            inversedBy: livres
+            mappedBy: livres
         auteurs:
             targetEntity: Auteur
-            inversedBy: livres
+            mappedBy: livres
     oneToMany:
         prets:
             targetEntity: Pret

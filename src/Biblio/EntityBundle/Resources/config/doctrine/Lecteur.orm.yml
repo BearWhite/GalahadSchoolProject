@@ -18,7 +18,7 @@ Biblio\EntityBundle\Entity\Lecteur:
     oneToMany:
         prets:
             targetEntity: Pret
-            mappedBy: pret               
+            mappedBy: lecteur               
     manyToOne:
         cycle:
            targetEntity: Cycle

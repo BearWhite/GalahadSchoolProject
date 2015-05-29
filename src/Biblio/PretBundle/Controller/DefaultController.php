@@ -20,9 +20,10 @@ class DefaultController extends Controller
      public function listPretAction() {
         $repository = $this->getDoctrine()->getManager()    
                               ->getRepository('BiblioEntityBundle:Pret');
-        $prets = $repository->findAll();
+        $prets = $repository->findBy(array('isReservation'=> 0));
+        $reservations = $repository->findBy(array('isReservation'=> 1));
         return $this->render('BiblioPretBundle:Pret:list.html.twig',
-                             array('prets' => $prets));
+                             array('prets' => $prets,'reservations' => $reservations));
     }
     
      public function nbLivre($livre){
@@ -62,8 +63,9 @@ class DefaultController extends Controller
                                   ->getRepository('BiblioEntityBundle:Pret');
     
                 $livre = $form->get('livre')->getData();
-                $prets = $repository->findByLivre($livre->getTitre());
-                return $this->render('BiblioPretBundle:Pret:list.html.twig', array('prets' => $prets));
+                $prets = $repository->findByLivre($livre->getTitre(),0);
+                $reservations = $repository->findByLivre($livre->getTitre(),1);
+                return $this->render('BiblioPretBundle:Pret:list.html.twig', array('prets' => $prets,'reservations' => $reservations));
             }
         }
         return $this->render('BiblioPretBundle:Pret:listByLivre.html.twig', array('form' => $form->createView())); 
@@ -85,8 +87,9 @@ class DefaultController extends Controller
                                   ->getRepository('BiblioEntityBundle:Pret');
     
                 $emprunteur = $form->get('emprunteur')->getData();
-                $prets = $repository->findByEmprunteur($emprunteur->getNom(),$emprunteur->getPrenom());
-                return $this->render('BiblioPretBundle:Pret:list.html.twig', array('prets' => $prets));
+                $prets = $repository->findByEmprunteur($emprunteur->getNom(),$emprunteur->getPrenom(),0);
+                $reservations = $repository->findByEmprunteur($emprunteur->getNom(),$emprunteur->getPrenom(),1);
+                return $this->render('BiblioPretBundle:Pret:list.html.twig', array('prets' => $prets,'reservations' => $reservations));
             }
         }
         return $this->render('BiblioPretBundle:Pret:listByEmprunteur.html.twig', array('form' => $form->createView())); 
@@ -111,10 +114,10 @@ class DefaultController extends Controller
                 $livre = $form->get('livre')->getData();         
                
                 if ( $this->nbLivre($livre) > 0){
-                    $session->getFlashBag()->add('info', 'Le livre '.$livre->getTitre().' est disponible : '.$this->nbLivre($livre).' exemplaire(s) disponible(s)');
+                    $session->getFlashBag()->add('info', 'Le livre '.$livre->getTitre().' est disponible : '.$this->nbLivre($livre).' exemplaire(s) disponible(s).');
                 }
                 else{
-                    $session->getFlashBag()->add('info', 'Le livre '.$livre->getTitre().' n est pas disponible');
+                    $session->getFlashBag()->add('info', 'Le livre '.$livre->getTitre().' n est pas disponible.');
                 }     
             }
         }
@@ -139,34 +142,55 @@ class DefaultController extends Controller
             $em = $this->getDoctrine()->getManager();
             $livre = $form->get('livre')->getData();
             $emprunteur = $form->get('lecteur')->getData();
+            $isReservation = $form->get('isReservation')->getData();
             
-            if($this->nbLivre($livre) <= 0){
-                $session->getFlashBag()->add('info', "Il n'y a plus d'exemplaires du livre " .$livre->getTitre()." pour le moment.");
+            if($isReservation == 1){
+                if($emprunteur->getCycle()->getId() != 3){
+                    if($this->nbPret($emprunteur) <= 0){
+                        $session->getFlashBag()->add('info', "L'emprunteur a atteint son nombre limite de prêts.");
+                        
+                        return $this->render('BiblioPretBundle:Pret:sortie.html.twig', array(
+                            'entity' => $entity,
+                            'form'   => $form->createView(),));
+                    }
+                }
                 
-                return $this->render('BiblioPretBundle:Pret:sortie.html.twig', array(
-                    'entity' => $entity,
-                    'form'   => $form->createView(),));
+                $em->persist($entity);
+                
+                $em->flush();
+    
+                $session->getFlashBag()->add('info', 'Le livre a bien été réservé.');
+                
             }
-            
-            if($emprunteur->getCycle()->getId() != 3){
-                if($this->nbPret($emprunteur) <= 0){
-                    $session->getFlashBag()->add('info', "L'emprunteur a atteint son nombre limite de prêts");
+            else{
+                if($this->nbLivre($livre) <= 0){
+                    $session->getFlashBag()->add('info', "Il n'y a plus d'exemplaires du livre " .$livre->getTitre()." pour le moment.");
                     
                     return $this->render('BiblioPretBundle:Pret:sortie.html.twig', array(
                         'entity' => $entity,
                         'form'   => $form->createView(),));
                 }
+                
+                if($emprunteur->getCycle()->getId() != 3){
+                    if($this->nbPret($emprunteur) <= 0){
+                        $session->getFlashBag()->add('info', "L'emprunteur a atteint son nombre limite de prêts/réservations.");
+                        
+                        return $this->render('BiblioPretBundle:Pret:sortie.html.twig', array(
+                            'entity' => $entity,
+                            'form'   => $form->createView(),));
+                    }
+                }
+                
+                $em->persist($entity);
+                
+                
+                $livre = $em->getRepository('BiblioEntityBundle:Livre')->find($entity->getLivre()->getId());
+                $livre->setNbExemplaire($livre->getNbExemplaire()-1);
+                
+                $em->flush();
+    
+                $session->getFlashBag()->add('info', 'Le livre a bien été prêté.');
             }
-            
-            $em->persist($entity);
-            
-            
-            $livre = $em->getRepository('BiblioEntityBundle:Livre')->find($entity->getLivre()->getId());
-            $livre->setNbExemplaire($livre->getNbExemplaire()-1);
-            
-            $em->flush();
-
-            $session->getFlashBag()->add('info', 'Le livre a bien été prêté');
         }
 
         return $this->render('BiblioPretBundle:Pret:sortie.html.twig', array(
@@ -197,8 +221,26 @@ class DefaultController extends Controller
         ));
     }
     
-    public function deleteAction($id)
-    {
+    public function annulerReservationAction($id){
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('BiblioEntityBundle:Pret')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Pret entity.');
+        }
+
+        $em->remove($entity);
+        $em->flush();
+        
+        $request = $this->getRequest();
+        $session = $request->getSession();
+       
+        $session->getFlashBag()->add('info', 'La réservation a bien été annulée.');
+                
+        return $this->redirect($this->generateUrl('biblio_pret_list'));
+    }
+    
+    public function retourPretAction($id){
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('BiblioEntityBundle:Pret')->find($id);
 
@@ -229,6 +271,29 @@ class DefaultController extends Controller
         if($date > $entity->getDateReservation()->modify(" + ". $entity->getLecteur()->getCycle()->getDureePret(). "days")){
             $session->getFlashBag()->add('info', 'Retour hors delai !!');
         }
+                
+        return $this->redirect($this->generateUrl('biblio_pret_list'));
+    }
+    
+    public function reservationToPretAction($id){
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('BiblioEntityBundle:Pret')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Pret entity.');
+        }
+
+        $entity->setIsReservation(0);
+        
+        $livre = $em->getRepository('BiblioEntityBundle:Livre')->find($entity->getLivre()->getId());
+        $livre->setNbExemplaire($livre->getNbExemplaire()-1);
+
+        $em->flush();
+        
+        $request = $this->getRequest();
+        $session = $request->getSession();
+        
+        $session->getFlashBag()->add('info', 'Le livre a bien été retiré.');
                 
         return $this->redirect($this->generateUrl('biblio_pret_list'));
     }

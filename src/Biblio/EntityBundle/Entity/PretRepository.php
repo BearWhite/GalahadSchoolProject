@@ -12,21 +12,25 @@ use Doctrine\ORM\EntityRepository;
  */
 class PretRepository extends EntityRepository
 {
-	public function findByLivre($titre) {
+	public function findByLivre($titre,$isReservation) {
         $queryBuider = $this->createQueryBuilder('p');
         $queryBuider->leftJoin('p.livre', 'l')
                     ->where('l.titre = :titre')
-                    ->setParameter('titre', $titre);
+                    ->setParameter('titre', $titre)
+                    ->andWhere('p.isReservation = :isReservation')
+                    ->setParameter('isReservation', $isReservation);
        return $queryBuider->getQuery()->getResult();
     }
     
-   public function findByEmprunteur($nom,$prenom) {
+   public function findByEmprunteur($nom,$prenom,$isReservation) {
         $queryBuider = $this->createQueryBuilder('p');
         $queryBuider->leftJoin('p.lecteur', 'l')
                     ->where('l.nom = :nom')
                     ->setParameter('nom', $nom)
                     ->andWhere('l.prenom = :prenom')
-                    ->setParameter('prenom', $prenom);
+                    ->setParameter('prenom', $prenom)
+                    ->andWhere('p.isReservation = :isReservation')
+                    ->setParameter('isReservation', $isReservation);
        return $queryBuider->getQuery()->getResult();
     }
     

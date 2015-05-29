@@ -24,7 +24,13 @@ biblio_pret_sortie2:
     defaults: { _controller: "BiblioPretBundle:Default:create" }
     requirements: { _method: post }
 biblio_pret_retour:
-    path:     /pret/{id}/delete
-    defaults: { _controller: "BiblioPretBundle:Default:delete" }
+    path:     /pret/{id}/retourPret
+    defaults: { _controller: "BiblioPretBundle:Default:retourPret" }
+biblio_reservation_annulation:
+    path:     /pret/{id}/annulerReservation
+    defaults: { _controller: "BiblioPretBundle:Default:annulerReservation" }
+biblio_reservation_pret:
+    path:     /pret/{id}/reservationToPret
+    defaults: { _controller: "BiblioPretBundle:Default:reservationToPret" }
 
 

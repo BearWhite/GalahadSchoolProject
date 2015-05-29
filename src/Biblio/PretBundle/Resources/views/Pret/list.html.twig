@@ -9,6 +9,18 @@
       <li>Aucun prêt pour cette recherche</li>
 {% endfor %}
 
+<h3>Liste des réservations</h3>
+{% for reservation in reservations %}
+ - Le livre " {{reservation.livre.titre}} " a été reservé le {{reservation.dateReservation|date('d/m/Y')}} par {{reservation.lecteur.nom}} {{reservation.lecteur.prenom}} <a href="{{ path('biblio_reservation_annulation', { 'id': reservation.id }) }}">Annuler Réservation</a>
+ {% if reservation.livre.nbExemplaire > 0 %}
+ - <a href="{{ path('biblio_reservation_pret', { 'id': reservation.id }) }}">Retirer le livre</a> </br>
+  {% else %}
+  </br>
+{% endif %}
+ {% else %}
+      <li>Aucune réservation pour cette recherche</li>
+{% endfor %}
+
 </br>
 
 {% for message in app.session.flashbag.get('info') %}
