@@ -283,7 +283,9 @@ class DefaultController extends Controller
             throw $this->createNotFoundException('Unable to find Pret entity.');
         }
 
+        $date = new \Datetime();
         $entity->setIsReservation(0);
+        $entity->setDateReservation($date);
         
         $livre = $em->getRepository('BiblioEntityBundle:Livre')->find($entity->getLivre()->getId());
         $livre->setNbExemplaire($livre->getNbExemplaire()-1);

@@ -59,7 +59,8 @@ class PretRepository extends EntityRepository
                     ->leftJoin('le.cycle', 'c')
                     ->leftJoin('p.livre', 'li')
                     ->where("CURRENT_DATE() > DATE_ADD(p.dateReservation, c.dureePret, 'day')")
-                    ->andWhere('c.id != 3');;
+                    ->andWhere('c.id != 3')
+                    ->andWhere('p.isReservation = 0');
        return $queryBuider->getQuery()->getResult();
     }
    

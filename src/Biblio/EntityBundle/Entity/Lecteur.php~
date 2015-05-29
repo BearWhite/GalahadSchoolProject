@@ -167,7 +167,7 @@ class Lecteur
     
     public function __toString()
     {
-        return $this->prenom . " " .$this->nom;
+        return  $this->prenom;
     }
     /**
      * @var \Doctrine\Common\Collections\Collection
