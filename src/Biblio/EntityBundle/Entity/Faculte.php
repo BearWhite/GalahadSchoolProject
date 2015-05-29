@@ -97,4 +97,9 @@ class Faculte
     {
         return $this->lecteurs;
     }
+    
+    public function __toString()
+    {
+        return $this->nom;
+    }
 }

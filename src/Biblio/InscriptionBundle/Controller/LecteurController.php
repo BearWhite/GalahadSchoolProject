@@ -21,14 +21,20 @@ class LecteurController extends Controller
      */
     public function indexAction()
     {
+        return $this->render('BiblioInscriptionBundle:Default:index.html.twig');
+    }
+    
+    public function listAllLecteursAction()
+    {
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('BiblioEntityBundle:Lecteur')->findAll();
 
-        return $this->render('BiblioInscriptionBundle:Lecteur:index.html.twig', array(
+        return $this->render('BiblioInscriptionBundle:Lecteur:list.html.twig', array(
             'entities' => $entities,
         ));
     }
+    
     /**
      * Creates a new Lecteur entity.
      *
@@ -67,7 +73,7 @@ class LecteurController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', 'submit', array('label' => 'Créer', 'attr' => array('class' => 'btn btn-default')));
 
         return $form;
     }

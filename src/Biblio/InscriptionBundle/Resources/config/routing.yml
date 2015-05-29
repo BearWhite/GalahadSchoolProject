@@ -1,34 +1,35 @@
-biblio_inscription_homepage:
-    path:     inscription/hello/{name}
-    defaults: { _controller: BiblioInscriptionBundle:Default:index }
+biblio_inscription_lecteur_list:
+    path:     administration/inscription/lecteur/list
+    defaults: { _controller: BiblioInscriptionBundle:Lecteur:listAllLecteurs }
 
-biblio_inscription_inscrit:
-    path:     inscription/
+biblio_inscription_homepage:
+    path:     administration/inscription/
     defaults: { _controller: "BiblioInscriptionBundle:Lecteur:index" }
 
 biblio_inscription_show:
-    path:     inscription/{id}/show
+    path:     administration/inscription/lecteur/{id}/show
     defaults: { _controller: "BiblioInscriptionBundle:Lecteur:show" }
 
-biblio_inscription_new:
-    path:     inscription/new
+biblio_inscription_lecteur_new:
+    path:     administration/inscription/lecteur/new
     defaults: { _controller: "BiblioInscriptionBundle:Lecteur:new" }
 
 biblio_inscription_create:
-    path:     inscription/create
+    path:     administration/inscription/lecteur/create
     defaults: { _controller: "BiblioInscriptionBundle:Lecteur:create" }
     methods:  POST
 
 biblio_inscription_edit:
-    path:     inscription/{id}/edit
+    path:     administration/inscription/lecteur/{id}/edit
     defaults: { _controller: "BiblioInscriptionBundle:Lecteur:edit" }
 
 biblio_inscription_update:
-    path:     inscription/{id}/update
+    path:     administration/inscription/lecteur/{id}/update
     defaults: { _controller: "BiblioInscriptionBundle:Lecteur:update" }
     methods:  [POST, PUT]
 
 biblio_inscription_delete:
-    path:     inscription/{id}/delete
+    path:     administration/inscription/lecteur/{id}/delete
     defaults: { _controller: "BiblioInscriptionBundle:Lecteur:delete" }
     methods:  [POST, DELETE]
+

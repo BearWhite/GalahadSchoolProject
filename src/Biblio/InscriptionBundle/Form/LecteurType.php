@@ -17,7 +17,6 @@ class LecteurType extends AbstractType
         $builder
             ->add('nom')
             ->add('prenom')
-            ->add('pret')
             ->add('cycle')
             ->add('faculte')
         ;

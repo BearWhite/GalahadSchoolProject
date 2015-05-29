@@ -125,4 +125,9 @@ class Cycle
     {
         return $this->lecteurs;
     }
+    
+    public function __toString()
+    {
+        return "".$this->id;
+    }
 }

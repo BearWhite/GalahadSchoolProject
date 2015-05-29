@@ -1,1 +1,9 @@
-Hello {{ name }}!
+{% extends "BiblioEntityBundle:Default:layout.html.twig" %}
+
+{% block content %}
+<h2>Menu Agent aux inscriptions</h2>
+<ul class="nav nav-pills nav-stacked">
+        <li><a href="{{ path('biblio_inscription_lecteur_list') }}"> Lister l'ensemble des lecteurs inscrits</a></li>
+</ul>
+
+{% endblock %}

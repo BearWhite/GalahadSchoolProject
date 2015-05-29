@@ -1,16 +1,10 @@
-{% extends '::base.html.twig' %}
+{% extends "BiblioEntityBundle:Default:layout.html.twig" %}
 
-{% block body -%}
+{% block content %}
     <h1>Lecteur edit</h1>
 
     {{ form(edit_form) }}
-
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('biblio_inscription_inscrit') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+    {{ form(delete_form) }}
+<br>
+<a class="btn btn-primary btn-lg" href="{{ path('biblio_inscription_homepage') }}"> Retour Accueil</a>
 {% endblock %}

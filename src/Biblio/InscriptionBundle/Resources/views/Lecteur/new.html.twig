@@ -1,15 +1,9 @@
-{% extends '::base.html.twig' %}
+{% extends "BiblioEntityBundle:Default:layout.html.twig" %}
 
-{% block body -%}
+{% block content %}
     <h1>Lecteur creation</h1>
 
     {{ form(form) }}
-
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('biblio_inscription_inscrit') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+<br>
+<a class="btn btn-primary btn-lg" href="{{ path('biblio_inscription_homepage') }}"> Retour Accueil</a>
 {% endblock %}
