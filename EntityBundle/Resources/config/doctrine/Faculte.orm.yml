@@ -1,0 +1,19 @@
+Biblio\EntityBundle\Entity\Faculte:
+    type: entity
+    table: null
+    repositoryClass: Biblio\EntityBundle\Entity\FaculteRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        nom:
+            type: string
+            length: '100'                
+    oneToMany:
+        lecteurs:
+            targetEntity: Lecteur
+            mappedBy: faculte
+lifecycleCallbacks: {  }

@@ -1,0 +1,4 @@
+services:
+#    biblio_pret.example:
+#        class: Biblio\PretBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

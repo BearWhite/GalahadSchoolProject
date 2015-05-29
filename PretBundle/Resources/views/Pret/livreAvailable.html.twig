@@ -1,0 +1,19 @@
+{% extends "BiblioEntityBundle:Default:layout.html.twig" %}
+
+{% block pret_contenu %}
+
+<h3>Recherche la disponibilité d'un livre :</h3>
+
+{% include "BiblioPretBundle:Pret:formulaire.html.twig" %}
+
+{% for message in app.session.flashbag.get('info') %}
+
+   <p> {{ message }}</p>
+
+ {% endfor %}
+
+</br>
+ <a class="btn btn-primary btn-lg" href="{{ path('biblio_pret_homepage') }}"> Retour Accueil</a>
+
+
+{% endblock %}

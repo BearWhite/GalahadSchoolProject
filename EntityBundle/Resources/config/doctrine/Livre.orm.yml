@@ -1,0 +1,31 @@
+Biblio\EntityBundle\Entity\Livre:
+    type: entity
+    table: null
+    repositoryClass: Biblio\EntityBundle\Entity\LivreRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        titre:
+            type: string
+            length: '100'
+        resume:
+            type: string
+            length: '255'
+        nbExemplaire:
+            type: integer                 
+    manyToMany:
+        themes:
+            targetEntity: Theme
+            inversedBy: livres
+        auteurs:
+            targetEntity: Auteur
+            inversedBy: livres
+    oneToMany:
+        prets:
+            targetEntity: Pret
+            mappedBy: livre
+lifecycleCallbacks: {  }

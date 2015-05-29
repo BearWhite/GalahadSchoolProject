@@ -1,0 +1,4 @@
+services:
+#    biblio_entity.example:
+#        class: Biblio\EntityBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

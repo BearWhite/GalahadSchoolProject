@@ -1,0 +1,29 @@
+Biblio\EntityBundle\Entity\Lecteur:
+    type: entity
+    table: null
+    repositoryClass: Biblio\EntityBundle\Entity\LecteurRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        nom:
+            type: string
+            length: '50'
+        prenom:
+            type: string
+            length: '50' 
+    oneToMany:
+        prets:
+            targetEntity: Pret
+            mappedBy: pret               
+    manyToOne:
+        cycle:
+           targetEntity: Cycle
+           inversedBy: lecteurs
+        faculte:
+           targetEntity: Faculte
+           inversedBy: lecteurs
+lifecycleCallbacks: {  }
