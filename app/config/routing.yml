@@ -1,0 +1,15 @@
+biblio_pret:
+    resource: "@BiblioPretBundle/Resources/config/routing.yml"
+    prefix:   /
+
+biblio_inscription:
+    resource: "@BiblioInscriptionBundle/Resources/config/routing.yml"
+    prefix:   /
+
+biblio_entity:
+    resource: "@BiblioEntityBundle/Resources/config/routing.yml"
+    prefix:   /
+
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation
