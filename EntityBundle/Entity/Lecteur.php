@@ -164,4 +164,54 @@ class Lecteur
     {
         return $this->faculte;
     }
+    
+    public function __toString()
+    {
+        return $this->prenom . " " .$this->nom;
+    }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $prets;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->prets = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add prets
+     *
+     * @param \Biblio\EntityBundle\Entity\Pret $prets
+     * @return Lecteur
+     */
+    public function addPret(\Biblio\EntityBundle\Entity\Pret $prets)
+    {
+        $this->prets[] = $prets;
+
+        return $this;
+    }
+
+    /**
+     * Remove prets
+     *
+     * @param \Biblio\EntityBundle\Entity\Pret $prets
+     */
+    public function removePret(\Biblio\EntityBundle\Entity\Pret $prets)
+    {
+        $this->prets->removeElement($prets);
+    }
+
+    /**
+     * Get prets
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPrets()
+    {
+        return $this->prets;
+    }
 }

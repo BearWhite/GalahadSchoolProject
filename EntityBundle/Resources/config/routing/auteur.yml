@@ -1,0 +1,30 @@
+auteur:
+    path:     /
+    defaults: { _controller: "BiblioEntityBundle:Auteur:index" }
+
+auteur_show:
+    path:     /{id}/show
+    defaults: { _controller: "BiblioEntityBundle:Auteur:show" }
+
+auteur_new:
+    path:     /new
+    defaults: { _controller: "BiblioEntityBundle:Auteur:new" }
+
+auteur_create:
+    path:     /create
+    defaults: { _controller: "BiblioEntityBundle:Auteur:create" }
+    requirements: { _method: post }
+
+auteur_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "BiblioEntityBundle:Auteur:edit" }
+
+auteur_update:
+    path:     /{id}/update
+    defaults: { _controller: "BiblioEntityBundle:Auteur:update" }
+    requirements: { _method: post|put }
+
+auteur_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "BiblioEntityBundle:Auteur:delete" }
+    requirements: { _method: post|delete }

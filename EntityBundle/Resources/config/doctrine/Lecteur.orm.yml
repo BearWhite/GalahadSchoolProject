@@ -14,11 +14,12 @@ Biblio\EntityBundle\Entity\Lecteur:
             length: '50'
         prenom:
             type: string
-            length: '50'                
+            length: '50' 
+    oneToMany:
+        prets:
+            targetEntity: Pret
+            mappedBy: pret               
     manyToOne:
-        pret:
-           targetEntity: Pret
-           inversedBy: lecteurs
         cycle:
            targetEntity: Cycle
            inversedBy: lecteurs

@@ -11,16 +11,13 @@ Biblio\EntityBundle\Entity\Pret:
     fields:
         dateReservation:
             type: date
-        dateRetourMax:
-            type: date
         isReservation:
             type: boolean                 
-    oneToMany:
-        inscrit:
-            targetEntity: Lecteur
-            mappedBy: pret
     manyToOne:
         livre:
            targetEntity: Livre
+           inversedBy: prets
+        lecteur:
+           targetEntity: Lecteur
            inversedBy: prets
 lifecycleCallbacks: {  }

@@ -10,7 +10,7 @@ Biblio\EntityBundle\Entity\Cycle:
                 strategy: AUTO
     fields:
         dureePret:
-            type: date
+            type: integer
         nbLivre:
             type: integer                 
     oneToMany:

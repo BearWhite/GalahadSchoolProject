@@ -22,7 +22,7 @@ class Auteur
     /**
      * @var string
      */
-    private $prenom;
+    private $prenom;  
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -124,5 +124,9 @@ class Auteur
     public function getLivres()
     {
         return $this->livres;
+    }
+
+    public function __toString(){
+        return  $this->nom;
     }
 }

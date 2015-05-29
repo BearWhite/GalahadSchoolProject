@@ -20,32 +20,25 @@ class Pret
     private $dateReservation;
 
     /**
-     * @var \DateTime
-     */
-    private $dateRetourMax;
-
-    /**
      * @var boolean
      */
     private $isReservation;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $inscrit;
-
-    /**
      * @var \Biblio\EntityBundle\Entity\Livre
      */
     private $livre;
-
+    
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->inscrit = new \Doctrine\Common\Collections\ArrayCollection();
+        $date=new \DateTime();
+        $this->dateReservation=$date;
+        $this->lecteur = new \Doctrine\Common\Collections\ArrayCollection();
     }
+
 
     /**
      * Get id
@@ -80,28 +73,8 @@ class Pret
         return $this->dateReservation;
     }
 
-    /**
-     * Set dateRetourMax
-     *
-     * @param \DateTime $dateRetourMax
-     * @return Pret
-     */
-    public function setDateRetourMax($dateRetourMax)
-    {
-        $this->dateRetourMax = $dateRetourMax;
 
-        return $this;
-    }
 
-    /**
-     * Get dateRetourMax
-     *
-     * @return \DateTime 
-     */
-    public function getDateRetourMax()
-    {
-        return $this->dateRetourMax;
-    }
 
     /**
      * Set isReservation
@@ -126,38 +99,7 @@ class Pret
         return $this->isReservation;
     }
 
-    /**
-     * Add inscrit
-     *
-     * @param \Biblio\EntityBundle\Entity\Lecteur $inscrit
-     * @return Pret
-     */
-    public function addInscrit(\Biblio\EntityBundle\Entity\Lecteur $inscrit)
-    {
-        $this->inscrit[] = $inscrit;
-
-        return $this;
-    }
-
-    /**
-     * Remove inscrit
-     *
-     * @param \Biblio\EntityBundle\Entity\Lecteur $inscrit
-     */
-    public function removeInscrit(\Biblio\EntityBundle\Entity\Lecteur $inscrit)
-    {
-        $this->inscrit->removeElement($inscrit);
-    }
-
-    /**
-     * Get inscrit
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getInscrit()
-    {
-        return $this->inscrit;
-    }
+    
 
     /**
      * Set livre
@@ -180,5 +122,56 @@ class Pret
     public function getLivre()
     {
         return $this->livre;
+    }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $lecteur;
+
+
+    /**
+     * Add lecteur
+     *
+     * @param \Biblio\EntityBundle\Entity\Lecteur $lecteur
+     * @return Pret
+     */
+    public function addLecteur(\Biblio\EntityBundle\Entity\Lecteur $lecteur)
+    {
+        $this->lecteur[] = $lecteur;
+
+        return $this;
+    }
+
+    /**
+     * Remove lecteur
+     *
+     * @param \Biblio\EntityBundle\Entity\Lecteur $lecteur
+     */
+    public function removeLecteur(\Biblio\EntityBundle\Entity\Lecteur $lecteur)
+    {
+        $this->lecteur->removeElement($lecteur);
+    }
+
+    /**
+     * Get lecteur
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getLecteur()
+    {
+        return $this->lecteur;
+    }
+
+    /**
+     * Set lecteur
+     *
+     * @param \Biblio\EntityBundle\Entity\Lecteur $lecteur
+     * @return Pret
+     */
+    public function setLecteur(\Biblio\EntityBundle\Entity\Lecteur $lecteur = null)
+    {
+        $this->lecteur = $lecteur;
+
+        return $this;
     }
 }

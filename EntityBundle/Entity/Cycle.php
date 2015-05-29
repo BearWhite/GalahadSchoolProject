@@ -15,7 +15,7 @@ class Cycle
     private $id;
 
     /**
-     * @var \DateTime
+     * @var integer
      */
     private $dureePret;
 
