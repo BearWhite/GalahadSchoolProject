@@ -1,35 +1,57 @@
-biblio_inscription_lecteur_list:
-    path:     administration/inscription/lecteur/list
-    defaults: { _controller: BiblioInscriptionBundle:Lecteur:listAllLecteurs }
+#### GLOBAL ####
+biblio_inscription_list:
+    path:     administration/inscription/list/{type}
+    defaults: { _controller: BiblioInscriptionBundle:Inscription:listAll, type:lecteur}
 
 biblio_inscription_homepage:
     path:     administration/inscription/
-    defaults: { _controller: "BiblioInscriptionBundle:Lecteur:index" }
+    defaults: { _controller: "BiblioInscriptionBundle:Inscription:index" }
 
-biblio_inscription_show:
-    path:     administration/inscription/lecteur/{id}/show
-    defaults: { _controller: "BiblioInscriptionBundle:Lecteur:show" }
 
+#### LECTEUR ####
 biblio_inscription_lecteur_new:
     path:     administration/inscription/lecteur/new
-    defaults: { _controller: "BiblioInscriptionBundle:Lecteur:new" }
+    defaults: { _controller: "BiblioInscriptionBundle:Inscription:new" }
 
-biblio_inscription_create:
+biblio_inscription_lecteur_create:
     path:     administration/inscription/lecteur/create
-    defaults: { _controller: "BiblioInscriptionBundle:Lecteur:create" }
+    defaults: { _controller: "BiblioInscriptionBundle:Inscription:create" }
     methods:  POST
 
-biblio_inscription_edit:
+biblio_inscription_lecteur_edit:
     path:     administration/inscription/lecteur/{id}/edit
-    defaults: { _controller: "BiblioInscriptionBundle:Lecteur:edit" }
+    defaults: { _controller: "BiblioInscriptionBundle:Inscription:edit" }
 
-biblio_inscription_update:
+biblio_inscription_lecteur_update:
     path:     administration/inscription/lecteur/{id}/update
-    defaults: { _controller: "BiblioInscriptionBundle:Lecteur:update" }
+    defaults: { _controller: "BiblioInscriptionBundle:Inscription:update" }
     methods:  [POST, PUT]
 
-biblio_inscription_delete:
+biblio_inscription_lecteur_delete:
     path:     administration/inscription/lecteur/{id}/delete
-    defaults: { _controller: "BiblioInscriptionBundle:Lecteur:delete" }
-    methods:  [POST, DELETE]
+    defaults: { _controller: "BiblioInscriptionBundle:Inscription:delete" }
+
+##### FACULTE #####
+biblio_inscription_faculte_new:
+    path:     administration/inscription/faculte/new
+    defaults: { _controller: "BiblioInscriptionBundle:Inscription:newFaculte" }
+
+biblio_inscription_faculte_create:
+    path:     administration/inscription/faculte/create
+    defaults: { _controller: "BiblioInscriptionBundle:Inscription:createFaculte" }
+    methods:  POST
+
+biblio_inscription_faculte_edit:
+    path:     administration/inscription/faculte/{id}/edit
+    defaults: { _controller: "BiblioInscriptionBundle:Inscription:editFaculte" }
+
+biblio_inscription_faculte_update:
+    path:     administration/inscription/faculte/{id}/update
+    defaults: { _controller: "BiblioInscriptionBundle:Inscription:updateFaculte" }
+    methods:  [POST, PUT]
+
+biblio_inscription_faculte_delete:
+    path:     administration/inscription/faculte/{id}/delete
+    defaults: { _controller: "BiblioInscriptionBundle:Inscription:deleteFaculte" }
+
 

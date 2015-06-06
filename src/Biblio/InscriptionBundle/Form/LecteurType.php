@@ -15,10 +15,24 @@ class LecteurType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nom')
-            ->add('prenom')
-            ->add('cycle')
-            ->add('faculte')
+            ->add('nom','text', array(
+                            'attr' => array('class' => 'form-control'),
+                            'label' => 'Nom'
+                            ))
+            ->add('prenom','text', array(
+                            'attr' => array('class' => 'form-control'),
+                            'label' => 'Prenom'
+                            ))
+            ->add('cycle','entity', array(
+                            'class' => "BiblioEntityBundle:Cycle",
+                            'attr' => array('class' => 'form-control'),
+                            'label' => 'Cycle'
+                            ))
+            ->add('faculte','entity', array(
+                            'class' => "BiblioEntityBundle:Faculte",
+                            'attr' => array('class' => 'form-control'),
+                            'label' => 'Faculté'
+                            ))
         ;
     }
     

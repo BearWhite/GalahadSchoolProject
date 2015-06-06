@@ -1,10 +1,12 @@
 {% extends "BiblioEntityBundle:Default:layout.html.twig" %}
 
 {% block content %}
-    <h1>Lecteur edit</h1>
-
+    <div class="page-title"><h1>Edition du lecteur: <b> {{ entity.prenom}} {{ entity.nom }}</b></h1></div>
+    {% include 'BiblioInscriptionBundle:Default:notification.html.twig' %}
+    <div class="form">
     {{ form(edit_form) }}
-    {{ form(delete_form) }}
+    </div>
 <br>
-<a class="btn btn-primary btn-lg" href="{{ path('biblio_inscription_homepage') }}"> Retour Accueil</a>
+    <a class="btn btn-default" role="button" href="{{ path('biblio_inscription_homepage') }}"> <span class="glyphicon glyphicon-home" aria-hidden="true"></span> Retour Accueil</a>
+        <a class="btn btn-default" role="button" href="{{ path('biblio_inscription_list',  { 'type': 'lecteur' }) }}"> <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span> Retour à la gestion des lecteurs</a>
 {% endblock %}

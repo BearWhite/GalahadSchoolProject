@@ -1,9 +1,12 @@
 {% extends "BiblioEntityBundle:Default:layout.html.twig" %}
 
 {% block content %}
-    <h1>Lecteur creation</h1>
-
+    <div class="page-title"><h1>Ajout d'un nouveau lecteur</h1></div>
+    {% include 'BiblioInscriptionBundle:Default:notification.html.twig' %}
+    <div class="form">
     {{ form(form) }}
+    </div>
 <br>
-<a class="btn btn-primary btn-lg" href="{{ path('biblio_inscription_homepage') }}"> Retour Accueil</a>
+   <a class="btn btn-default" role="button" href="{{ path('biblio_inscription_homepage') }}"> <span class="glyphicon glyphicon-home" aria-hidden="true"></span> Retour Accueil</a>
+        <a class="btn btn-default" role="button" href="{{ path('biblio_inscription_list',  { 'type': 'lecteur' }) }}"> <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span> Retour à la gestion des lecteurs</a>
 {% endblock %}

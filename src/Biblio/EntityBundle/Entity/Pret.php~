@@ -20,11 +20,6 @@ class Pret
     private $dateReservation;
 
     /**
-     * @var \DateTime
-     */
-    private $dateRetourMax;
-
-    /**
      * @var boolean
      */
     private $isReservation;
@@ -39,6 +34,8 @@ class Pret
      */
     public function __construct()
     {
+        $date=new \DateTime();
+        $this->dateReservation=$date;
         $this->lecteur = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -76,28 +73,8 @@ class Pret
         return $this->dateReservation;
     }
 
-    /**
-     * Set dateRetourMax
-     *
-     * @param \DateTime $dateRetourMax
-     * @return Pret
-     */
-    public function setDateRetourMax($dateRetourMax)
-    {
-        $this->dateRetourMax = $dateRetourMax;
 
-        return $this;
-    }
 
-    /**
-     * Get dateRetourMax
-     *
-     * @return \DateTime 
-     */
-    public function getDateRetourMax()
-    {
-        return $this->dateRetourMax;
-    }
 
     /**
      * Set isReservation

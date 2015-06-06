@@ -128,6 +128,35 @@ class Cycle
     
     public function __toString()
     {
-        return "".$this->id;
+        return $this->nom;
     }
+    /**
+     * @var string
+     */
+    private $nom;
+
+
+    /**
+     * Set nom
+     *
+     * @param string $nom
+     * @return Cycle
+     */
+    public function setNom($nom)
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    /**
+     * Get nom
+     *
+     * @return string 
+     */
+    public function getNom()
+    {
+        return $this->nom;
+    }
+    
 }

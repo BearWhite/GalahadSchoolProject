@@ -9,6 +9,9 @@ Biblio\EntityBundle\Entity\Cycle:
             generator:
                 strategy: AUTO
     fields:
+        nom:
+            type: string
+            length: '50'        
         dureePret:
             type: integer
         nbLivre:
