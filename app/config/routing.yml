@@ -1,3 +1,11 @@
+biblio_lecteur:
+    resource: "@BiblioLecteurBundle/Resources/config/routing.yml"
+    prefix:   /
+
+biblio_security:
+    resource: "@BiblioSecurityBundle/Resources/config/routing.yml"
+    prefix:   /
+
 biblio_pret:
     resource: "@BiblioPretBundle/Resources/config/routing.yml"
     prefix:   /

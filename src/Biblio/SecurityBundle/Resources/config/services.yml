@@ -1,0 +1,4 @@
+services:
+#    biblio_security.example:
+#        class: Biblio\SecurityBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

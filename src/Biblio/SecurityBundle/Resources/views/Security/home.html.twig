@@ -1,0 +1,18 @@
+{% extends "BiblioEntityBundle:Default:layout.html.twig" %}
+
+{% block content %}
+    <div class="page-title"><h1>MENU</h1></div>
+<ul class="nav nav-pills nav-stacked">
+    {% if ( is_granted('ROLE_ADMIN') or is_granted('ROLE_AGENT_PRET') ) %}
+        <li><a href="{{ path('biblio_pret_homepage') }}"> Accèder à la gestion des prets</a></li>
+    {% endif %}
+    {% if ( is_granted('ROLE_ADMIN') or is_granted('ROLE_AGENT_INSC') ) %}
+        <li><a href="{{ path('biblio_inscription_list') }}"> Accèder à la gestion des lecteurs inscrits</a></li>
+        <li><a href="{{ path('biblio_inscription_list',  { 'type': 'faculte' }) }}"> Accèder à la gestion des facultés</a></li>
+    {% endif %}
+    {% if ( is_granted('ROLE_ADMIN') or is_granted('ROLE_LECTEUR') ) %}
+        <li><a href="{{ path('biblio_lecteur_listPrets') }}"> Accèder à vos prets et reservation en cours</a></li>
+    {% endif %}
+</ul>
+
+{% endblock %}

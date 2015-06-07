@@ -20,6 +20,8 @@ class AppKernel extends Kernel
             new Biblio\EntityBundle\BiblioEntityBundle(),
             new Biblio\InscriptionBundle\BiblioInscriptionBundle(),
             new Biblio\PretBundle\BiblioPretBundle(),
+            new Biblio\SecurityBundle\BiblioSecurityBundle(),
+            new Biblio\LecteurBundle\BiblioLecteurBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

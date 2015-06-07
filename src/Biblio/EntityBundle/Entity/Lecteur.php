@@ -3,11 +3,11 @@
 namespace Biblio\EntityBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * Lecteur
  */
-class Lecteur
+class Lecteur implements UserInterface, \Serializable
 {
     /**
      * @var integer
@@ -213,5 +213,107 @@ class Lecteur
     public function getPrets()
     {
         return $this->prets;
+    }
+    /**
+     * @var string
+     */
+    private $username;
+
+    /**
+     * @var string
+     */
+    private $password;
+
+
+    /**
+     * Set username
+     *
+     * @param string $username
+     * @return Lecteur
+     */
+    public function setUsername($username)
+    {
+        $this->username = $username;
+
+        return $this;
+    }
+
+    /**
+     * Get username
+     *
+     * @return string 
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    /**
+     * Set password
+     *
+     * @param string $password
+     * @return Lecteur
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * Get password
+     *
+     * @return string 
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+    
+    public function getSalt() {
+        return '';  // sel vide !
+    }
+    
+    public function getRoles() {
+         return $this->roles->toArray();
+    }
+
+    
+    public function eraseCredentials() { }
+    public function serialize() {
+        return serialize(array( $this->id, $this->username, $this->password));
+    }
+    public function unserialize($serialized) {
+        list( $this->id, $this->username, $this->password) = unserialize($serialized);
+    }
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $roles;
+
+
+    /**
+     * Add roles
+     *
+     * @param \Biblio\EntityBundle\Entity\Role $roles
+     * @return Lecteur
+     */
+    public function addRole(\Biblio\EntityBundle\Entity\Role $roles)
+    {
+        $this->roles[] = $roles;
+
+        return $this;
+    }
+
+    /**
+     * Remove roles
+     *
+     * @param \Biblio\EntityBundle\Entity\Role $roles
+     */
+    public function removeRole(\Biblio\EntityBundle\Entity\Role $roles)
+    {
+        $this->roles->removeElement($roles);
     }
 }

@@ -1,0 +1,54 @@
+{% extends "BiblioEntityBundle:Default:layout.html.twig" %}
+
+{% block content %}
+    <div class="page-title"><h1>Liste de vos prets</h1></div>
+{% include 'BiblioInscriptionBundle:Default:notification.html.twig' %}
+	{{ empruntsRestants }}
+    <table class="table table-hover table-condensed table-bordered">
+    <tr>
+		<th>Identifiant prêt</th>
+		<th>Date de prêt</th>
+        <th>Titre du livre</th>
+		<th>Resumé</th>
+		<th>Actions</th>
+    </tr>
+        {% for entity in entities %}
+		{% if entity.isReservation == 0 %}
+    <tr>
+		<td>{{ entity.id }}</td>
+		<td>{{ entity.dateReservation|date('d/m/Y') }}</td>
+        <td><a href="{{ path('biblio_lecteur_voirLivre',{ 'id': entity.livre.id }) }}">{{ entity.livre.titre }}</a></td>
+		<td>{{  entity.livre.resume|length > 50 ?  entity.livre.resume|slice(0, 50) ~ '...' :  entity.livre.resume  }}</td>
+		<td></td>
+	</tr>
+		{% endif %}
+        {% endfor %}
+     </table>
+    <div class="page-title"><h1>Liste de vos réservations</h1></div>
+	    <table class="table table-hover table-condensed table-bordered">
+    <tr>
+		<th> Disponibilité </th>
+		<th>Identifiant réservation</th>
+		<th>Date de réservation</th>
+        <th>Titre du livre</th>
+		<th>Resumé</th>
+		<th>Actions</th>
+    </tr>
+        {% for entity in entities %}
+		{% if entity.isReservation == 1 %}
+    <tr>
+		<td class="text-center">{% if entity.livre.nbExemplaire > 0  %} <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> {% else %} <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> {% endif %}
+		<td>{{ entity.id }}</td>
+		<td>{{ entity.dateReservation|date('d/m/Y') }}</td>
+        <td>{{ entity.livre.titre }}</td>
+		<td>{{  entity.livre.resume|length > 50 ?  entity.livre.resume|slice(0, 50) ~ '...' :  entity.livre.resume  }}</td>
+		<td><a href="{{ path('biblio_lecteur_annulerReservation', { 'id': entity.id }) }}" name="Annuler réservation" class="btn btn-xs btn-danger" role="button" ><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Annuler cette réservation</a></td>
+	</tr>
+		{% endif %}
+        {% endfor %}
+     </table>
+	
+	
+ <br>
+   <a class="btn btn-default" role="button" href="{{ path('biblio_main_homepage') }}"> <span class="glyphicon glyphicon-home" aria-hidden="true"></span> Retour Accueil</a>
+    {% endblock %}

@@ -1,0 +1,12 @@
+{% extends "BiblioEntityBundle:Default:layout.html.twig" %}
+
+{% block content %}
+    <div class="page-title"><h1>Login</h1></div>
+    <form action="{{ path('login_check') }}" method="post">
+      <label for="username">Login :</label>
+      <input type="text" id="username" name="_username" value="{{ last_username }}" class='form-control'/>
+      <label for="password">Mot de passe :</label>
+      <input type="password" id="password" name="_password" class='form-control'/>
+      <button type="submit"  class='marge-button btn btn-success'>Se connecter</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,24 @@
+Biblio\EntityBundle\Entity\Role:
+    type: entity
+    table: null
+    repositoryClass: Biblio\EntityBundle\Entity\GroupeRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        role:
+            type: string
+            length: '15'
+            unique: true
+        designation:
+            type: string
+            length: '50'
+            
+    manyToMany:
+        users:
+            targetEntity: Lecteur
+            mappedBy: roles
+    lifecycleCallbacks: {  }

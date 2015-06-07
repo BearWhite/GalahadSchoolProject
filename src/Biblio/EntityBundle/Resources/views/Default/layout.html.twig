@@ -22,7 +22,15 @@
 
 
 <body>
-
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <p class="navbar-brand text-center">Bonjour {% if app.user %} {{ app.user.prenom }} {{app.user.nom}} ! (<b>{{ app.user.username }} - {% for role in app.security.token.roles %}
+      {{ role.designation }}
+    {% endfor %}</b>)[<a href="{{ path('logout') }}">Se déconnecter</a>] {% else %} ! Identifiez-vous maintenant pour profiter des avantages du merveilleux système de gestion de bibliothèque.{% endif %} </p>
+    </div>
+  </div>
+</nav>
   <div class="container">
 
     <div id="header" class="jumbotron">

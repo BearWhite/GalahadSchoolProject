@@ -1,0 +1,25 @@
+{% extends "BiblioEntityBundle:Default:layout.html.twig" %}
+
+{% block content %}
+    <div class="page-title"><h1>Infos Livre: {{ entity.titre }}</h1></div>
+{% include 'BiblioInscriptionBundle:Default:notification.html.twig' %}
+<ul>
+<li><u>Thème(s):</u>
+{% for theme in entity.themes %}
+    {{ theme.titre }}
+{% endfor %}
+</li>
+<li> <u>Auteur(s):</u>
+        {% for auteur in entity.auteurs %}
+            {{ auteur.prenom }} {{ auteur.nom }},
+        {% endfor %}
+</li>
+<li> <u>Résumé du livre:</u>
+    {{ entity.resume }}
+</li>
+<ul>	
+	
+ <br>
+   <a class="btn btn-success" role="button" href="{{ path('biblio_lecteur_reserverLivre', { 'id': entity.id }) }}"> <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Réserver ce livre</a>
+   <a class="btn btn-default" role="button" href="{{ path('biblio_main_homepage') }}"> <span class="glyphicon glyphicon-home" aria-hidden="true"></span> Retour Accueil</a>
+    {% endblock %}

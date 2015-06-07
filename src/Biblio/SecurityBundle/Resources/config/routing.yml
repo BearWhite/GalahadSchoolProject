@@ -1,0 +1,13 @@
+login:
+    pattern:  /login
+    defaults: { _controller: BiblioSecurityBundle:Security:login }
+
+login_check:
+    pattern:  /login_check
+
+logout:
+    pattern:  /logout
+    
+biblio_main_homepage:
+    pattern: /accueil
+    defaults: { _controller: BiblioSecurityBundle:Security:main }

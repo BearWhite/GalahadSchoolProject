@@ -1,0 +1,12 @@
+biblio_lecteur_listPrets:
+    path:     /lecteur/listPretsEtReservations
+    defaults: { _controller: BiblioLecteurBundle:Lecteur:listPretsEtReservations }
+biblio_lecteur_annulerReservation:
+    path:     /lecteur/annulerReservation/{id}
+    defaults: { _controller:BiblioLecteurBundle:Lecteur:annulerReservation }
+biblio_lecteur_voirLivre:
+    path:     /lecteur/voirLivre/{id}
+    defaults: { _controller:BiblioLecteurBundle:Lecteur:voirLivre }
+biblio_lecteur_reserverLivre:
+    path:     /lecteur/reserverLivre/{id}
+    defaults: { _controller:BiblioLecteurBundle:Lecteur:reserverLivre }

@@ -7,6 +7,7 @@
 
     <table class="table table-hover table-condensed table-bordered">
     <tr>
+        <th>Pseudonyme</th>
         <th>Nom</th>
         <th>Prenom</th>
         <th>Faculté</th>
@@ -15,6 +16,7 @@
     </tr>
         {% for entity in entities %}
     <tr>
+        <td>{{ entity.username }}</td>
         <td>{{ entity.nom }}</td>
         <td>{{ entity.prenom }}</td>
         <td>{{ entity.faculte.nom }}</td>
@@ -29,5 +31,5 @@
 
     <a class="btn btn-primary" role="button" href="{{ path('biblio_inscription_lecteur_new') }}"> <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Ajouter un lecteur </a>
 <br><br>
-   <a class="btn btn-default" role="button" href="{{ path('biblio_inscription_homepage') }}"> <span class="glyphicon glyphicon-home" aria-hidden="true"></span> Retour Accueil</a>
+   <a class="btn btn-default" role="button" href="{{ path('biblio_main_homepage') }}"> <span class="glyphicon glyphicon-home" aria-hidden="true"></span> Retour Accueil</a>
     {% endblock %}

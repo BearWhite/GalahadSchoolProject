@@ -9,6 +9,12 @@ Biblio\EntityBundle\Entity\Lecteur:
             generator:
                 strategy: AUTO
     fields:
+        username:
+            type: string
+            length: '50'
+        password:
+            type: string
+            length: '50'
         nom:
             type: string
             length: '50'
@@ -26,4 +32,9 @@ Biblio\EntityBundle\Entity\Lecteur:
         faculte:
            targetEntity: Faculte
            inversedBy: lecteurs
+    manyToMany:
+        roles:
+            targetEntity: Role
+            inversedBy: users
+
 lifecycleCallbacks: {  }

@@ -15,6 +15,14 @@ class LecteurType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('username','text', array(
+                            'attr' => array('class' => 'form-control'),
+                            'label' => 'Pseudo'
+                            ))
+            ->add('password','text', array(
+                            'attr' => array('class' => 'form-control'),
+                            'label' => 'Mot de passe'
+                            ))        
             ->add('nom','text', array(
                             'attr' => array('class' => 'form-control'),
                             'label' => 'Nom'
