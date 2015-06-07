@@ -13,3 +13,11 @@
 </button></div>
 
  {% endfor %}
+ 
+  {% for message in app.session.flashbag.get('info') %}
+
+   <div class="alert alert-info" role="alert"><b><span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span></b>  {{ message }} <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+  <span aria-hidden="true">&times;</span>
+</button></div>
+
+ {% endfor %}

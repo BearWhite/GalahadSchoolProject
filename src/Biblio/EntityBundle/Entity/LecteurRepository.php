@@ -12,4 +12,13 @@ use Doctrine\ORM\EntityRepository;
  */
 class LecteurRepository extends EntityRepository
 {
+	public function search($string)
+	{
+		$qb = $this->createQueryBuilder('l');
+		$qb->where('l.nom LIKE :nom')
+		->orWhere('l.prenom LIKE :nom')
+     	->setParameter('nom','%'.$string.'%');
+		 
+		 return $qb->getQuery()->getResult();
+	}
 }

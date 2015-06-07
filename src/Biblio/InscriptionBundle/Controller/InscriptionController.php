@@ -43,6 +43,22 @@ class InscriptionController extends Controller
         }
     }
     
+    public function rechercherInscritAction(Request $request)
+    {
+        $session = $request->getSession();
+        $entities = null;
+        $string = null;
+        if ($request->getMethod() == 'POST')
+        {
+            $repositoryLecteur = $this->getDoctrine()->getManager()->getRepository('BiblioEntityBundle:Lecteur');  
+            $string = $request->request->get('_search');
+            $entities = $repositoryLecteur->search($string);
+        }
+        return $this->render('BiblioInscriptionBundle:Lecteur:search.html.twig', array(
+            'last_search' => $string,
+            'entities'         => $entities));
+    }
+    
     //Lister lecteurs ou Facultés selon la variable GET
     
     public function listAllAction($type)
@@ -80,6 +96,7 @@ class InscriptionController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $entity->addRole($em->getRepository('BiblioEntityBundle:Role')->find(2));
             $em->persist($entity);
             $em->flush();
             $this->manageNotifications(Constants::LECTEUR_PARAMETER,'success',Constants::ADD,$entity->getPrenom().' '.$entity->getNom());
@@ -228,14 +245,22 @@ class InscriptionController extends Controller
             $em = $this->getDoctrine()->getManager();
             $entity = $em->getRepository('BiblioEntityBundle:Lecteur')->find($id);
 
+            $repositoryPret = $this->getDoctrine()->getManager()->getRepository('BiblioEntityBundle:Pret');  
+            $nbPretActuel = $repositoryPret->findNbPret($entity->getId());
+            
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Lecteur entity.');
             }
-
+            if($nbPretActuel > 0)
+            {
+            $this->manageNotifications(Constants::LECTEUR_PARAMETER,'alert',Constants::DELETE,$entity->getPrenom().' '.$entity->getNom().' n\'a pas pu être supprimé car des prêts/réservations sont encore en cours.');
+            }
+            else{
             $em->remove($entity);
             $em->flush();
-            
             $this->manageNotifications(Constants::LECTEUR_PARAMETER,'success',Constants::DELETE,$entity->getPrenom().' '.$entity->getNom());
+            }
+            
         }
         catch(NotFoundHttpException $e)
         {
@@ -247,23 +272,6 @@ class InscriptionController extends Controller
         }
         
         return $this->redirect($this->generateUrl('biblio_inscription_list'));
-    }
-    
-    /**
-     * Creates a form to delete a Lecteur entity by id.
-     *
-     * @param mixed $id The entity id
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm($id)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('biblio_inscription_lecteur_delete', array('id' => $id)))
-            ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
-        ;
     }
     
         /**
@@ -431,11 +439,15 @@ class InscriptionController extends Controller
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Faculte entity.');
             }
-
+            if(!empty($entity->getLecteurs()))
+            {
+              $this->manageNotifications(Constants::FACULTE_PARAMETER,'alert',Constants::DELETE,$entity->getNom().' ne peut pas être supprimé car des lecteurs y sont encore rattachés.');  
+            }
+            else{
             $em->remove($entity);
             $em->flush();
-            
             $this->manageNotifications(Constants::FACULTE_PARAMETER,'success',Constants::DELETE,$entity->getNom());
+            }
         }
         catch(NotFoundHttpException $e)
         {
@@ -446,24 +458,7 @@ class InscriptionController extends Controller
             $this->manageNotifications(Constants::FACULTE_PARAMETER,'alert',Constants::DELETE,'GlobalException',$dbE->getStatusCode());
         }
         
-        return $this->redirect($this->generateUrl('biblio_inscription_faculte_list'));
-    }
-    
-    /**
-     * Creates a form to delete a Lecteur entity by id.
-     *
-     * @param mixed $id The entity id
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteFaculteForm($id)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('biblio_inscription_faculte_delete', array('id' => $id)))
-            ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
-        ;
+        return $this->redirect($this->generateUrl('biblio_inscription_list', array('type' => 'faculte')));
     }
  
 }

@@ -20,6 +20,11 @@
 <ul>	
 	
  <br>
-   <a class="btn btn-success" role="button" href="{{ path('biblio_lecteur_reserverLivre', { 'id': entity.id }) }}"> <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Réserver ce livre</a>
+ {% if entity.nbExemplaire > 0 %}
+   <a class="btn btn-success" role="button" href="#"> <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Ce livre est disponible en bibliothèque</a>
+ {% else %}
+ <a class="btn btn-danger" role="button" href="#"> <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Indisponible actuellement</a>
+   <a class="btn btn-warning" role="button" href="{{ path('biblio_lecteur_reserverLivre', { 'id': entity.id }) }}"> <span class="glyphicon glyphicon-flash" aria-hidden="true"></span> Réserver ce livre</a>
+ {% endif %}
    <a class="btn btn-default" role="button" href="{{ path('biblio_main_homepage') }}"> <span class="glyphicon glyphicon-home" aria-hidden="true"></span> Retour Accueil</a>
     {% endblock %}

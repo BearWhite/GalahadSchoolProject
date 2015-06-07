@@ -20,8 +20,15 @@ class LecteurController extends Controller
        $user = $this->getUser();
        
        $entities = $em->getRepository('BiblioEntityBundle:Pret')->findByLecteur($user);
+       if($this->informationsDroits($user) == 0 && $user->getCycle()->getId() != 3)
+                $this->getRequest()->getSession()->getFlashBag()->add('info', 'Votre limite d\'emprunts/réservations est atteinte.');
        
-       return $this->render('BiblioLecteurBundle:Lecteur:list.html.twig', array('entities' => $entities, 'empruntsRestants' => $this->informationsDroits($user)));
+       return $this->render('BiblioLecteurBundle:Lecteur:list.html.twig', array('entities' => $entities));
+    }
+    
+    public function rechercheLivreAction()
+    {
+        
     }
     
     public function informationsDroits($lecteur)

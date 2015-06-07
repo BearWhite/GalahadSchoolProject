@@ -54,4 +54,8 @@ biblio_inscription_faculte_delete:
     path:     administration/inscription/faculte/{id}/delete
     defaults: { _controller: "BiblioInscriptionBundle:Inscription:deleteFaculte" }
 
+biblio_inscription_lecteur_search:
+    path:     administration/inscription/lecteur/rechercher
+    defaults: { _controller: "BiblioInscriptionBundle:Inscription:rechercherInscrit" }
+
 
